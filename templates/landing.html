@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home Page {% endblock %}
+{% block content %}
+    <style>
+        .center {
+            margin: 0, auto;
+            display: block;
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .posts-content {
+            margin-top: 20px;
+        }
+
+        .ui-w-40 {
+            width: 40px !important;
+            height: auto;
+        }
+
+        .default-style .ui-bordered {
+            border: 1px solid rgba(24, 28, 33, 0.06);
+        }
+
+
+        .default-style .ui-bordered {
+            border: 1px solid rgba(24, 28, 33, 0.06);
+        }
+    </style>
+    <h1>Home Page</h1>
+
+    {% for review in page_obj %}
+
+        <div class="container posts-content">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="media mb-3">
+                            <img src="{{ review.user.profile_rasm.url }}"
+                                 class="d-block ui-w-40 rounded-circle" alt="">
+                            <div class="media-body ml-3">
+                                <b>{{ review.user.username }}</b> rated this book <b>{{ review.stars_given }}</b> stars
+                                <div class="text-muted small">{{ review.created_at }}</div>
+                            </div>
+                        </div>
+
+                        <p>
+                            {{ review.comment }}
+                        </p>
+                        <img class="img-thumbnail center" src="{{ review.book.book_picter.url }}">
+
+                    </div>
+
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                        <a href="{% url 'book:books' %}?page={{ page_obj.previous_page_number }}"></a>
+                    {% endif %}
+                    <li class="page-item active"><a class="page-link" href="">{{ page_obj.number }}</a></li>
+
+                    {% if page_obj.has_next %}
+
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last
+                            &raquo;</a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+        </div>
+
+
+    {% endfor %}
+
+{% endblock %}
