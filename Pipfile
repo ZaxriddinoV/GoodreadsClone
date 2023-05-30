@@ -9,6 +9,7 @@ psycopg2 = "*"
 pillow = "*"
 crispy-bootstrap5 = "*"
 djangorestframework = "*"
+gunicorn = "*"
 
 [dev-packages]
 
