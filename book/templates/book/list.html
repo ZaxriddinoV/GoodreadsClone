@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<h1>Books</h1>
+<h1 class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">Books</h1>
 
     <div class="row mb-4">
         <div class="col-4">
@@ -21,10 +21,10 @@
         {% for book in page_obj.object_list %}
             <div class="row">
                 <div class="col-2 mb-3">
-                    <img class="img img-thumbnail" src="{{ book.book_picter.url }}">
+                    <a href="{% url 'book:detail' book.id%}"><img class="img img-thumbnail" src="{{ book.book_picter.url }}"></a>
                 </div>
                 <div class="col-6 ms-4">
-                    <a href="{% url 'book:detail' book.id%}">{{ book.title }}</a>
+                    <a href="{% url 'book:detail' book.id%}" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ book.title }}</a>
                     <p class="fw-semibold">{{ book.dascription }}</p>
 
                 </div>
